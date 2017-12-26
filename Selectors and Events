@@ -1,0 +1,310 @@
+jQuery Selectors & Click Events: FULL CODE
+Variables/ Function Exercises in console
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>Nov 11 JS Practice</title>
+    <!-- Bootstrap -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <h1>JavaScript - Selectors & Events</h2>
+
+
+    <div id="Profle" class="col-md-8">
+        <h2 id="name">Karre Lawson</h2>
+
+        <div class="img-container">
+            <img id="picture" src="https://photos-6.dropbox.com/t/2/AABqZTFNbGxhLYM-5Wa2fGeJqCS2dCYr9zddPiVgLSi2ww/12/243104733/jpeg/32x32/1/_/1/2/sbg.jpg/ELeCttkBGLUBIAcoBw/hNbslWyOSa6YvyewBq-FP5DCy8TZmwnZ3jm-xSfzm88?size=1600x1200&size_mode=3" width="350" height="420" alt="Profile Pic">
+        </div>
+<br />
+        <div id="about-me">
+            <div>
+                <p>Get to know me by reading some info about me</p>
+                <p>Click here to <a href="mailto:spongebabe10@gmail.com">Email Me</a></p>
+            </div>
+
+            <button type="button" id="nextProfile">Change Profile</button>
+        <br>
+        <br>
+    </div>
+
+    <div id="addresses" class="col-md-12">
+        <h1>SAME ADDRESS</h1>
+        <div class="col-md-5" id="shipAddressContainer">
+
+            <form>
+                <h3>Shipping Address</h3>
+                <div class="form-group">
+                    <label for="name">First Name</label>
+                    <input type="text" id="firstName" class="form-control" value=" ">
+                </div>
+                <div class="form-group">
+                    <label for="lastName">Last Name</label>
+                    <input type="text" id="lastName" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="address">Addres Line 1</label>
+                    <input type="text" id="address" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="city">City</label>
+                    <input type="text" id="city" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="state">State</label>
+                    <input type="text" id="state" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="zip">ZIP</label>
+                    <input type="text" id="zip" class="form-control">
+                </div>
+
+                <button type="button" class="btn btn-primary" id="copy">Copy Shipping Address to Billing</button>
+
+            </form>
+        </div>
+
+        <div class="col-md-5" id="billAddressContainer">
+
+            <form>
+                <h3>Billing Address</h3>
+                <div class="form-group">
+                    <label for="billName">First Name</label>
+                    <input type="text" id="billName" class="form-control" value=" ">
+                </div>
+                <div class="form-group">
+                    <label for="billLastName">Last Name</label>
+                    <input type="text" id="billLastName" class="form-control">
+                </div>
+
+                <div class="form-group">
+                    <label for="billAddress">Addres Line 1</label>
+                    <input type="text" id="billAddress" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="billCity">City</label>
+                    <input type="text" id="billCity" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="billState">State</label>
+                    <input type="text" id="billState" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="billZip">ZIP</label>
+                    <input type="text" id="billZip" class="form-control">
+                </div>
+            </form>
+
+            <button id="clear" type="reset">Clear All</button>
+            <br>
+            <br>
+
+        </div>
+    </div>
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+    <!-- All your code goes below here-->
+
+    <script type="text/javascript">
+        // Profile Page
+
+        /*The button should invoke a function that changes the name, lastName of 
+        the current profile page to "John Smith". Also change the image to 
+        a different one.
+        Use the append() and prepend() to add NEW elements that contain a
+        License number and a Date.
+        Use JQuery to create a new profile using text(), html() and append().*/
+
+        $("#nextProfile").on("click", function () {
+            $("#name").text("John Smith");
+            $("#picture").attr("src", "http://files.sharenator.com/TQ0Qenz-Boop-collection-s620x401-437501.jpg");
+            //change img
+        });
+
+        // Address Forms
+
+        /*make both buttons functional*/
+
+        var copyPaste = function () {
+    
+            var firstNameCopied = $("#firstName").val(); 
+            var firstNamePaste = $("#billName").val(firstNameCopied);
+            var lastName = $("#lastName").val();
+            var billingLastName = $("#billLastName").val(lastName);
+            var address = $("#address").val(); 
+            var billingAddress = $("#billAddress").val(address);           
+            var city = $("#city").val(); 
+            var billingCity = $("#billCity").val(city);
+            var state = $("#state").val();
+            var billingState = $("#billState").val(state);
+            var zip = $("#zip").val(); 
+            var billingZip = $("#billZip").val(zip); 
+
+        };    
+
+        var clearFrom = function() {
+
+            var firstName = $("#firstName").val(" "); 
+            var billingFirstName = $("#billName").val(" ");
+            var lastName = $("#lastName").val(" ");
+            var billingLastName = $("#billLastName").val(" ");
+            var address = $("#address").val(" "); 
+            var billingAddress = $("#billAddress").val(" ");           
+            var city = $("#city").val(" "); 
+            var billingCity = $("#billCity").val(" ");
+            var state = $("#state").val(" ");
+            var billingState = $("#billState").val(" ");
+            var zip = $("#zip").val(" "); 
+            var billingZip = $("#billZip").val(" "); 
+
+        };
+
+        $("#copy").on('click', copyPaste);
+
+        $("#clear").on('click', clearFrom);
+        
+        ---------------------------------------------------------------------------------------------
+
+        // Declaring Variables Test
+        let testOne = 10;
+        console.log(testOne);
+
+        let testTwo = 23.5;
+        console.log(testTwo);
+
+        let testThree = true;
+        console.log(testThree);
+
+        let testApple = 'apple';
+        console.log(testApple);
+
+        let testNull = null;
+        console.log(testNull);
+
+        let testLast;
+        console.log(testLast);
+
+
+        //Varibles: declareSetOne
+        let x = 5;
+        let y = 2;
+        console.log(x + y);
+        console.log(x - y);
+        console.log(x / y);
+        console.log(x * y);
+
+
+        //Varibles: declareSetTwo
+        let i = 0;
+        i++; // process the i first then print the result - cannot process in the console (i.e console.log(i++); would print as zero) ++i processes first then prints
+        console.log(i); //why does this log as zero rather than one
+        i--;
+        console.log(i); // why does this log as one rather than -1
+
+
+        //Varibles: declareSetThree
+        let name = "Karre";
+        let lastName = "Lawson";
+        console.log(name, lastName);
+        console.log('My name is ' + name + " " + lastName);
+
+
+        console.log(10 % 2); //prints as 0 - because 10 divides by two evenly so it prints the remainder after division
+        console.log(9 % 2); //prints as 1 REMAINDER - because 9 does not divide evenly
+
+
+        //Function Exercises
+
+        function thisHalf(k) {
+            return k * 0.5;
+        };
+        console.log(thisHalf(10));
+
+
+        function thisQuarter(t) {
+            return t++;
+        };
+        console.log(thisQuarter(0));
+
+
+        function takesPara(message) {
+            console.log("The current string is \"" + message + "\"");
+        };
+        takesPara("go");
+
+        function noParameters() {
+            return "The woman/man is \"coding\""; //the forward slash allows for the double quote to be apart of the printed message
+
+        };
+        console.log(noParameters());
+
+
+        function threeParameters(e, r, u) {
+            var subtractExample = (e - r - u);
+            var sum = (subtractExample);
+            return sum;
+        };
+        console.log(threeParameters(20, 10, 3));
+
+
+        function fourParameters(a, o, h, d) {
+            var operation = ((a + o + h) / d);
+            return operation;
+        };
+        console.log(fourParameters(2, 2, 5, 3));
+
+
+        function singleParameter(number) {
+            var division = thisHalf(number);
+            return division + " is the half of " + number
+        };
+        console.log(singleParameter(20));
+
+        function test(para) {
+            if (para === true) {
+                return "This is true";
+            } else {
+                return "It is false";
+            }
+        };
+        console.log(test());
+
+
+        function isTen(number) {
+            if (number === 10) {
+                return "Equal to";
+            } else {
+                return "Not equal";
+            }
+        };
+        console.log(isTen(10));
+
+
+        function inRange(n) {
+            if (n > 3 && n < 20) {
+                return "In range";
+            } else {
+                return "Not in range";
+            }
+        };
+        console.log(inRange(6));
+
+    </script>
+
+
+
+</body>
+
+</html>
