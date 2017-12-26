@@ -1,0 +1,43 @@
+Basic For Loop on Array with if/else statement
+
+        var readingList = [
+            {
+                title: "Catcher in the Rye"
+                , author: "J.D. Salinger"
+                , isRead: true
+            },
+            {
+                title: "Cat in the Hat"
+                , author: "Dr. Suess"
+                , isRead: true
+            },
+            {
+                title: "Moby Dick"
+                , author: "Herman Melville"
+                , isRead: false
+            },
+            {
+                title: "Harry Potter and the Sorcerer's Stone"
+                , author: "J.K. Rowling"
+                , isRead: true
+            },
+
+            {
+                title: "The Chronicles of Narnia"
+                , author: "Unknown"
+                , isRead: false
+            },
+        ]
+
+        for (var i = 0; i < readingList.length; i++) {
+           
+           if(readingList[i].isRead == false) {
+           
+                console.log("I need to read " + readingList[i].title + " by " + readingList[i].author);
+            
+            } else {
+            
+                console.log("I have read " + readingList[i].title + " by " + readingList[i].author);
+            }
+
+        }
