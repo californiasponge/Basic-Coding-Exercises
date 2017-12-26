@@ -1,0 +1,116 @@
+Working with Objects - JS
+
+<script type="text/javascript">
+
+//creating and updating objects
+
+//dot notation
+        var car = {
+            make: "Toyota"
+            , model: "Rav4"
+            , year: 2015
+        };
+
+        car.make = 'Honda';
+        car.model = 'Civic';
+        car.year = 2018;
+        car.vin = 'N1234';
+        
+        
+        
+        var animal = {
+            animalName: "Johnny"
+            , animalType: "giraffe"
+            , age: 14
+            , neutered: true
+        };
+        animal.animalName = 'Chucho';
+        animal.animalType = 'dog';
+        animal.age = 3;
+        animal.neutered = false;       
+        
+//bracket notation
+
+        animal['animalName'] = 'Fido';
+        animal['animalType'] = 'dog';
+        animal['age'] = 4;
+        animal['neutered'] = true;
+
+//person object  w/ properties that have objects and methods
+        let person = {
+            firstName: "Monroe",
+            lastName: "Addams",
+            age: 25,
+            occupation: "Web Developer",
+            address: {
+                street: "Rodeo Drive"
+                , city: "Beverly Hills"
+                , state: "California"
+                , zip: 90210
+            },
+            personDetails: function () {
+                return `My name is $(this.firstName) and I am a(n) $(this.occupation)`;
+            }
+        };
+
+
+
+        // Object Reflection and Retrieving Objects
+        var accounts = {
+            BankOfAmerica: {
+                number: 12345
+                , nickname: "BA"
+                , city: "Los Angeles"
+                , checking: true
+                , services: {
+                    stolen: true
+                    , creditReport: true
+                }
+            }
+            , Chase: {
+                number: 78910
+                , nickname: "Ch"
+                , city: "San Diego"
+                , checking: false
+                , services: {
+                    stolen: false
+                    , creditReport: true
+                }
+            }
+            , WellsFargo: {
+                number: 11223
+                , _nickname: "WF"
+                , _city: "Los Angeles"
+                , _checking: true
+                , services: {
+                    stolen: false
+                    , creditReport: false
+                }
+            }
+        };
+
+        function printBanks(objBanks) {
+            for (const currentBankName in objBanks) {
+                if (objBanks.hasOwnProperty(currentBankName)) {
+                    const currentBank = objBanks[currentBankName];
+                    printServices(currentBank);
+                }
+            }
+        }
+
+        function printServices(bank) {
+
+            for (const propertyName in bank.services) {
+                if (bank.services.hasOwnProperty(propertyName)) {
+                    
+                    const element = bank.services[propertyName];
+                    console.log(bank.number + ": stolen card: " + bank.services["stolen"] + ", credit report: " + bank.services["creditReport"]);
+                    
+                }
+            }
+        };
+
+
+
+
+</script>
