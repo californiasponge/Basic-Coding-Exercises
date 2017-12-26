@@ -1,0 +1,137 @@
+FULL CODE for a basic form that appends values to DOM -- no form validation
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>Registration Form</title>
+    <!-- Bootstrap -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <style>
+            #resultsContainer {
+                background-color: gray;
+                color: #FFFFFF;
+            }
+    
+            form {
+                padding: 15px;
+                background-color: rgb(114, 197, 236);
+            }
+    </style>
+</head>
+
+<body>
+
+    <br />
+    <div class="col-md-6" id="formContainer">
+        <h1>Registration Form</h1>
+
+        <form>
+            <div class="form-group">
+                <label for="inputFirstName">First Name</label>
+                <input type="firstName" class="form-control" id="firstName" placeholder="First Name">
+            </div>
+            <div class="form-group">
+                <label for="inputLastName">Last Name</label>
+                <input type="lastName" class="form-control" id="lastName" placeholder="Last Name">
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" class="form-control" id="email" placeholder="JohnDoe@email.com">
+            </div>
+
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" class="form-control" id="password" placeholder="Password">
+            </div>
+
+            <div class="checkbox">
+                <label>
+                    <input required name="checkbox" type="checkbox"> I agree with Terms and Conditions
+                </label>
+            </div>
+
+            <button type="button" id="submitBtn" class="btn btn-primary">Submit</button>
+
+            <button type="reset" class="btn btn-default">Clear</button>
+        </form>
+    </div>
+
+
+
+    <div class="col-md-6 hidden" id="resultsContainer">
+        <p id="name"></p>
+        <p id="submitEmail"></p>
+        <p id="submitPass"></p>
+    </div>
+
+
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+    <!-- All your code goes below here-->
+    <script type="text/javascript">
+    $(document).ready(function() {
+        
+        console.log("something's working");
+        $("#submitBtn").on("click", onSumbitClick);
+        
+    });
+
+    var onSumbitClick = function (evt) {
+        console.log("clicked");
+        evt.preventDefault();
+        processData();
+    }
+
+    readForm = function() {
+        var firstName = $("#firstName").val();
+        var lastName = $("#lastName").val();
+        var email = $("#email").val();
+        var password = $("#password").val();
+
+        var completedForm = {
+
+            firstName: firstName
+            , lastName: lastName
+            , email: email
+            , password: password
+        }
+        return completedForm;
+    }
+
+    printToPage = function(completedForm) {
+        
+        $("#name").append(completedForm.firstName + " " + completedForm.lastName);
+        $("#submitEmail").append(completedForm.email);
+        $("#submitPass").append(completedForm.password);
+
+    }
+
+    processData = function() {
+        var formData = readForm();
+        printToPage(formData);
+        $("#resultsContainer").toggleClass("hidden");
+    }
+
+
+
+    </script>
+
+</body>
+
+</html>
