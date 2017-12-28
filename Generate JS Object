@@ -1,0 +1,357 @@
+Loop through a Javascript Object and append to DOM
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title>Karre Loop Comments</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Bootstrap -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body>
+    <div class="container">
+
+
+        <div class="row">
+            <div class="blog-post">
+                <h2 class="blog-post-title">My Blog</h2>
+                <p class="blog-post-meta">by
+                    <a href="#">LouiseBelcher@bobsburgers.com</a>
+                </p>
+
+                <div id="lipsum">
+                    <p>
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eu sapien scelerisque, dictum nisi vehicula, tincidunt nunc.
+                        Quisque ut lacinia ipsum, ut fermentum nisl. Donec et volutpat lectus. Cras tincidunt imperdiet tincidunt.
+                        Mauris consequat vestibulum euismod. Phasellus velit mauris, laoreet ut lacus sagittis, ultricies
+                        dapibus arcu. Interdum et malesuada fames ac ante ipsum primis in faucibus. Donec nulla risus, imperdiet
+                        ut urna pulvinar, cursus dignissim turpis. Curabitur cursus vehicula facilisis. Donec odio enim,
+                        blandit id cursus vel, pretium et lectus. Curabitur id eros rhoncus, bibendum sem et, ultricies magna.
+                        Suspendisse placerat semper pellentesque. Aenean varius molestie elit, at elementum neque rutrum
+                        luctus. Mauris at nisi in neque aliquam pulvinar. Aenean eu aliquet nisl.
+                    </p>
+
+                </div>
+            </div>
+
+        </div>
+
+        <div class="row commentsContainer">
+
+            <div class="comments">
+
+                <h2 class="title">There are 2 comments</h2>
+
+                <div class="row commentButtons">
+                    <div>
+                        <button type="button" id="showComment" class="btn btn-primary">Hide/Show Comments</button>
+
+                        <a href="#addComment">
+                            <button type="button" id="addCmt" class="btn btn-success">Add Comments</button>
+                        </a>
+                        <!--href to div triggers scroll to bottom of page-->
+
+                        <!-- reply button needs this info:  data-toggle="modal" data-target="#popUpWindow" -->
+
+                    </div>
+
+                </div>
+
+                <div class="hidden" id="postedComments" display="hidden">
+                    <!--hiding using HTML-->
+                </div>
+
+            </div>
+
+            <div class="col-md-6 hidden " id="addComment">
+                <h3>Leave a Comment Here</h3>
+                <form>
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" class="form-control" id="commentName" placeholder="Name">
+                    </div>
+                    <div class="form-group">
+                        <label for="subject">Subject</label>
+                        <input type="text" class="form-control" id="commentSubject" placeholder="Subject">
+                    </div>
+                    <div class="form-group">
+                        <label for="comment">Message</label>
+                        <textarea type="text" class="form-control" rows="6" id="commentMessage" placeholder="Write Your Reply Here"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <p class="help-block">comments that violate Terms and Conditions will be removed.</p>
+                    </div>
+                    <button type="submit" class="btn btn-default" id="submitComment">Submit</button>
+                </form>
+            </div>
+
+        </div>
+        <!--modal window-->
+        <div class="modal fade" role="dialog" id="popUpWindow">
+            <div class="modal-dialog">
+                <!--popup window container-->
+                <div class="modal-content">
+                    <div class="col-md-12 modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h3 class="modal-title">Add Your Reply</h3>
+                    </div>
+                    <div class="modal-body">
+                        <form>
+                            <div class="form-group">
+                                <label for="name">Name</label>
+                                <input type="text" class="form-control" id="replyName" placeholder="Name">
+                            </div>
+                            <div class="form-group">
+                                <label for="subject">Subject</label>
+                                <input type="text" class="form-control" id="replySubject" placeholder="Subject">
+                            </div>
+                            <div class="form-group">
+                                <label for="comment">Message</label>
+                                <textarea type="text" class="form-control" row="5" id="replyMessage" placeholder="Write Your Reply Here"></textarea>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal" id="closeReply">Close</button>
+
+                        <button type="submit" class="btn btn-success" id="submitReplyBtn" data-dismiss="modal">Submit Reply</button>
+
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+    <!-- /.container -->
+
+    <!-- jQuery (necessary for Bootstrap"s JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+    <!-- All your code goes below here-->
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+
+            console.log("Im Ready Im Ready Im Ready");
+
+            $("#showComment").on("click", revealComments);
+            $("#addCmt").on("click", showAddCommentForm);
+            $("#submitComment").on("click", submitNewComment);
+            $(".comments").on("click", ".reply-target", onClickReply); //event delegation - click handler on class comments handed off to class reply target
+            $(".comments").on("click", ".deleteComment", deleteComment)
+            $("#submitReplyBtn").on("click", submitNewReply);
+            $(".reply-target").on("click", onClickReply);
+            generateComments();
+
+        });
+
+
+        revealComments = function () {
+            $("#postedComments").toggleClass("hidden");              //show hide posted comments 
+        };
+
+        showAddCommentForm = function () {
+            $("#addComment").toggleClass("hidden");                 // shows/hides comment form
+        };
+
+        deleteComment = function (evt) {
+            evt.stopPropagation();
+            $(this).closest(".comment").remove();
+        };
+
+        submitNewComment = function () {
+            newComment();
+            clearForm();
+        };
+
+        submitNewReply = function () {
+            $(".reply-target").on("click", onClickReply);
+            //click reply button with class reply-target event onClickReply runs
+            addingReplyToBlog();
+            //appends comment info
+            clearReplyForm();
+        };
+
+        //Creating New Comments - 3 steps
+
+        //Step 1: create a clone of the template | the .html pull the content out of the script tage and creates a clone
+        getClone = function () {
+            return $($("#cloneItem").html())
+        };
+
+        //Step 2: 
+        // call the clone function to do the aforementioned step, 
+        // for user reading - set var to clone function and call variable which referrences 
+        // second parameter is a DOM Element, Document, or jQuery to use as context $(selector [, context ])
+        // .html pulls the content within its parenthesis. its .html because clone info <h3> <a> <p>
+        //  change the content to be written as the value of the form data selected by IDs
+        //  append this clone to the comments container -- automatically puts as last element b/c nature of append()
+        newComment = function () {
+            var clone = getClone();
+            $("#commentTitle", clone).html($("#commentSubject").val());
+            $("#name", clone).html($("#commentName").val());
+            $(".commentMessageParagraph", clone).html($("#commentMessage").val());
+            $("#postedComments").append(clone)
+        };
+
+        //Step 3: clear the values of the form (aka wipe/reset form)
+        clearForm = function () {
+            $("#commentSubject").val("");
+            $("#commentName").val("");
+            $("#commentMessage").val("");
+        };
+
+
+        //Creating New Replies - 5 Steps
+
+        //Step 1: Target the container to work on inputting data restricted to comment that was clicked
+        onClickReply = function () {
+            var parentContainer = $(this).closest("div.comment"); //this maps to click
+            //calls on the closest parent up the div that has the denoted class
+            nestedToContainer = parentContainer.find("div.replyMessageContainer").first();
+            //once restricted to particular container, this fliters/restricts to reply container
+            //Reduce the set of matched elements to the first in the set.first doesnt accept an argument
+        }
+
+        //Step 2: create a clone of the template | the .html pull the content out of the script tage and creates a clone
+        getReplyClone = function () {
+            return $($("#replyCloneItem").html()).clone();
+        };
+
+        //Step 3: 
+        // call the clone function to do the aforementioned step, 
+        // enter the id of each item you want to alter as jquery selector
+        // for user reading - set var to clone function and call variable which referrences 
+        // second parameter is a DOM Element, Document, or jQuery to use as context $(selector [, context ])
+        // .html pulls the content within its parenthesis. its .html because clone info <h3> <a> <p>
+        //  change the content to be written as the value of the form data selected by IDs  $("#/.templateDiv").html($("#formID").val);
+        //  return this newly created replyClone
+        newReplyComment = function () {
+            var replyClone = getReplyClone();
+            $("#commentTitle", replyClone).html($("#replySubject").val());
+            $("#name", replyClone).html($("#replyName").val());
+            $(".replyCommentMessageParagraph", replyClone).html($("#replyMessage").val());
+            return replyClone;
+        };
+
+        //Step 4: 
+        //  set var equal to step 2 function for user ability to read
+        //  select container and append newReplyComment 
+        //  call the container to the page
+        addingReplyToBlog = function () {
+            var replyData = newReplyComment();
+            $(nestedToContainer).append(replyData);
+            nestedToContainer;
+        }
+
+        //Step 5: clear the values of the form (aka wipe/reset form) -- note: there is a more efficent way to do this
+        clearReplyForm = function () {
+            $("#replySubject").val(" ");
+            $("#replyName").val(" ");
+            $("#replyMessage").val(" ");
+        }
+
+
+        //Generate JS Object
+        var myCommentArray = [
+            {
+                "_id": "12345678",
+                "index": 1,
+                "name": "Perez",
+                "message": "Pedro 4 President",
+                "subject": "This is a Subject for my message",
+                "replies": [ // notice this comment has replies (just 1 but it is still an array)
+                    {
+                        "_id": "90123456",
+                        "index": 0,
+                        "name": "reply for Perez",
+                        "message": "...",
+                        "subject": "reply subject"
+                    }
+                ]
+            },
+            {
+                "_id": "78901234",
+                "index": 0,
+                "name": "Shelton",
+                "message": "Benjamin Franklin",
+                "subject": "Shelly Oberon",
+                "replies": null // notice this comment has no replies and as such is null. this is better than an empty array
+            }
+        ];
+
+        generateComments = function () {
+            for (var i = 0; i < myCommentArray.length; i++) {
+                var myClone = getClone();
+                $("#name", myClone).text(myCommentArray[i].name);
+                $("#commentTitle", myClone).text(myCommentArray[i].subject);
+                $(".commentMessageParagraph", myClone).text(myCommentArray[i].message);
+                $("#postedComments").append(myClone);
+
+                if (myCommentArray[i].replies !== null) {
+
+                    var j = 0;
+                    for (var j = 0; j < myCommentArray[i].replies.length; j++) {
+
+                        var myReplyClone = getClone();
+                        $("#name", myReplyClone).text(myCommentArray[i].replies[j].name);
+                        $("#commentTitle", myReplyClone).text(myCommentArray[i].replies[j].subject);
+                        $(".replyCommentMessageParagraph", myReplyClone).text(myCommentArray[i].replies[j].message);
+                        $(".replyMessageContainer").append(myReplyClone);
+
+                    }
+                }
+
+            }
+
+            $(".reply-target").on("click", onClickReply);
+
+        }
+
+
+    </script>
+    <script type="text/template" id="cloneItem">
+        <div class="comment mediaclearfix">
+            <div class="comment-avatar media-left">
+                <img src="http://placehold.it/50x50" alt="avatar">
+            </div>
+            <div class="comment-content media-body clearfix">
+                <h3 class="media-heading" id="commentTitle">Comment title</h3>
+                <div class="comment-meta">By
+                    <a href="#" id="name">admin</a> | Today, 12:31</div>
+                <div class="comment-body" id="commentContent">
+                    <p class="commentMessageParagraph">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt
+                        ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
+                        ullamco laboris nisi ut aliquip ex ea commodo </p>
+                    
+                    <a href="blog-post.html" class="btn btn-gray more pull-right reply-target" data-toggle="modal" data-target="#popUpWindow">
+                        <i class="fa fa-reply"></i> Reply</a>
+                   
+                        <button type="button" class="btn btn-danger deleteComment pull-right">Delete</button>    
+                    <div class="replyMessageContainer">
+                            
+                    </div>
+                        
+                </div>
+            </div>
+        </div>
+    </script>
+
+
+</body>
+
+</html>
