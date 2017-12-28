@@ -1,0 +1,178 @@
+>> DIRECTIONS:
+    1. Use the form to add new tasks to todo list.
+    2. Use "X" button to delete the task from the list.
+    3. When you click anywhere on a task, you should populate the form above with the data for the given task. 
+        Also, change button caption from "Add" to "Update".
+        After making changes to task selected task should be updated instead of creating a new 
+            task on clicking "Update" button. After updating task change button caption back to "Add" and empty the form.
+<<    
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>Karre's To Do List</title>
+
+    <!-- Bootstrap -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+
+</head>
+
+<body>
+    <div class="container">
+        <!-- Add Item Container -->
+        <div class="row">
+            <div class="col-sm-offset-4 col-xs-4">
+                <form class="well">
+                    <div class="form-group">
+                        <label>Task</label>
+                        <input id="task" class="form-control" type="text" placeholder="To Do Item" />
+                    </div>
+                    <div class="form-group">
+                        <label>Priority</label>
+                        <!-- Dropdown -->
+                        <select id="dropdown" class="form-control">
+                            <option value="Low">Low</option>
+                            <option value="Medium">Medium</option>
+                            <option value="High">High</option>
+                        </select>
+                    </div>
+                    <button id="add" class="btn btn-primary center-block" id="add" type="button">Add</button>
+                </form>
+            </div>
+        </div>
+        <hr />
+        <!-- List Container-->
+        <div class="row">
+            <div class="col-sm-offset-3 col-sm-6">
+                <div id="listContainer">
+
+
+                    <div class="row task">
+                        <div class="col-sm-12">
+                            <br />
+                            <input type="button" class="btn btn-danger delete pull-right " value="X">
+                            <h3>Wash Car</h3>
+                            <p>Priority:
+                                <span>Low</span>
+                            </p>
+                        </div>
+                        <br />
+                    </div>
+
+
+                    <div class="row task">
+                        <div class="col-sm-12">
+                            <br />
+                            <input type="button" class="btn btn-danger delete pull-right " value="X">
+                            <h3>Pay Bills</h3>
+                            <p>Priority:
+                                <span>High</span>
+                            </p>
+                        </div>
+                        <br />
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/template" id="template">
+        <div class="row task">
+             <div class="col-sm-12">
+                <br />
+                <input type="button" class="btn btn-danger delete pull-right " value="X">
+                <h3>Pay Bills</h3>
+                <p>Priority:
+                    <span>High</span>
+                </p>
+            </div>
+            <br />
+        </div>
+    </script>
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+    <!-- Custom javascript -->
+
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+
+            console.log("Hello");
+            $("#add").on("click", onAdd);
+            $("#listContainer").on("click", ".delete", deleteTask);
+            //binding to container so added items can respond but restrict to when delete class is clicked rather than if you click anywhere
+            $(".row").on("click", ".task", updateTask);
+            //binding to class row so items can respond to handler but restrict to when task class is clicked rather than also if delete is clicked 
+        })
+        //$(".delete").on("click", deleteTask); 
+        //will fail due to evt prop, so if new one added because event binding already executed
+        //$("#listContainer").on("click", ".task", updateTask);
+        //will cause that when delete button is pushed - the update is invoked 
+
+
+        var onAdd = function () {
+            addTask();
+        }
+
+        var deleteTask = function () {
+            $(this).closest(".task").remove();     //this maps to delete button that was clicked
+            //console.log("clicked");
+        }
+
+        var activeTask = null; //page level var with global scope
+
+        //find task title h3 within context of clicked return the value of whats written
+        // write information back to the form
+        var updateTask = function () {
+            activeTask = $(this);
+            var task = $("h3", $(this)).text();
+            var priority = $("span", $(this)).text();      //this maps to task class until activeTask was added
+            $("#task").val(task);       //copies task to input
+            $("#dropdown").val(priority);   //copies priority
+            $("#add").text("Update");       //change caption of button
+
+        }
+
+
+        var myClone = function () {
+            // var templateHTML = $("#template").html();
+            // return $(templateHTML);
+
+            return $($("#template").html()) //-- above done in two steps vs this done in one 
+        }
+
+        var addTask = function () {
+            //reading from the form
+            var task = $("#task").val();
+            var priority = $("#dropdown").val();
+            var template;
+            if (activeTask == null) { //by default it is null
+                template = myClone();
+            } else {
+                template = activeTask;
+            };
+            //if null add mode not null update mode
+            //loading/modifying/adding template and clearing form
+            $("h3", template).text(task); //only select h3 from that specific template rather than h3's from whole doc
+
+            template.find("span").text(priority);
+
+            if (activeTask == null) {
+                $("#listContainer").append(template);
+            }
+            $("form")[0].reset();
+            activeTask = null;
+            $("#add").text("Add");
+        }
+            //when delete it will copy into the update so must 
+
+    </script>
+</body>
+
+</html>
