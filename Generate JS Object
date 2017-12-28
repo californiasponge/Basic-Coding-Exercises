@@ -160,25 +160,25 @@ Loop through a Javascript Object and append to DOM
         });
 
 
-        revealComments = function () {
+        var revealComments = function () {
             $("#postedComments").toggleClass("hidden");              //show hide posted comments 
         };
 
-        showAddCommentForm = function () {
+        var showAddCommentForm = function () {
             $("#addComment").toggleClass("hidden");                 // shows/hides comment form
         };
 
-        deleteComment = function (evt) {
+        var deleteComment = function (evt) {
             evt.stopPropagation();
             $(this).closest(".comment").remove();
         };
 
-        submitNewComment = function () {
+        var submitNewComment = function () {
             newComment();
             clearForm();
         };
 
-        submitNewReply = function () {
+        var submitNewReply = function () {
             $(".reply-target").on("click", onClickReply);
             //click reply button with class reply-target event onClickReply runs
             addingReplyToBlog();
@@ -189,7 +189,7 @@ Loop through a Javascript Object and append to DOM
         //Creating New Comments - 3 steps
 
         //Step 1: create a clone of the template | the .html pull the content out of the script tage and creates a clone
-        getClone = function () {
+        var getClone = function () {
             return $($("#cloneItem").html())
         };
 
@@ -200,7 +200,7 @@ Loop through a Javascript Object and append to DOM
         // .html pulls the content within its parenthesis. its .html because clone info <h3> <a> <p>
         //  change the content to be written as the value of the form data selected by IDs
         //  append this clone to the comments container -- automatically puts as last element b/c nature of append()
-        newComment = function () {
+        var newComment = function () {
             var clone = getClone();
             $("#commentTitle", clone).html($("#commentSubject").val());
             $("#name", clone).html($("#commentName").val());
@@ -208,8 +208,8 @@ Loop through a Javascript Object and append to DOM
             $("#postedComments").append(clone)
         };
 
-        //Step 3: clear the values of the form (aka wipe/reset form)
-        clearForm = function () {
+        //Step 3: clear the values of the form (aka wipe/reset form) -- NOTE: there's a more efficient way to do this!
+        var clearForm = function () {
             $("#commentSubject").val("");
             $("#commentName").val("");
             $("#commentMessage").val("");
@@ -219,7 +219,7 @@ Loop through a Javascript Object and append to DOM
         //Creating New Replies - 5 Steps
 
         //Step 1: Target the container to work on inputting data restricted to comment that was clicked
-        onClickReply = function () {
+       var onClickReply = function () {
             var parentContainer = $(this).closest("div.comment"); //this maps to click
             //calls on the closest parent up the div that has the denoted class
             nestedToContainer = parentContainer.find("div.replyMessageContainer").first();
@@ -229,7 +229,7 @@ Loop through a Javascript Object and append to DOM
 
         //Step 2: create a clone of the template | the .html pull the content out of the script tage and creates a clone
         getReplyClone = function () {
-            return $($("#replyCloneItem").html()).clone();
+              return $($("#cloneItem").html())
         };
 
         //Step 3: 
@@ -240,7 +240,7 @@ Loop through a Javascript Object and append to DOM
         // .html pulls the content within its parenthesis. its .html because clone info <h3> <a> <p>
         //  change the content to be written as the value of the form data selected by IDs  $("#/.templateDiv").html($("#formID").val);
         //  return this newly created replyClone
-        newReplyComment = function () {
+        var newReplyComment = function () {
             var replyClone = getReplyClone();
             $("#commentTitle", replyClone).html($("#replySubject").val());
             $("#name", replyClone).html($("#replyName").val());
@@ -252,14 +252,14 @@ Loop through a Javascript Object and append to DOM
         //  set var equal to step 2 function for user ability to read
         //  select container and append newReplyComment 
         //  call the container to the page
-        addingReplyToBlog = function () {
+        var addingReplyToBlog = function () {
             var replyData = newReplyComment();
             $(nestedToContainer).append(replyData);
             nestedToContainer;
         }
 
         //Step 5: clear the values of the form (aka wipe/reset form) -- note: there is a more efficent way to do this
-        clearReplyForm = function () {
+        var clearReplyForm = function () {
             $("#replySubject").val(" ");
             $("#replyName").val(" ");
             $("#replyMessage").val(" ");
@@ -294,7 +294,7 @@ Loop through a Javascript Object and append to DOM
             }
         ];
 
-        generateComments = function () {
+        var generateComments = function () {
             for (var i = 0; i < myCommentArray.length; i++) {
                 var myClone = getClone();
                 $("#name", myClone).text(myCommentArray[i].name);
