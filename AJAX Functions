@@ -1,0 +1,99 @@
+Javascript CRUD functions
+
+
+        // AJAX FUNCTIONS *****************************************************************************************
+        //GET
+        let getAllAuthors = function (onSuccess, onError) {
+
+            const settings = {
+                type: "GET"
+                , headers: {
+
+                    "API-AUTH": "U7WQREKB7"
+
+                }
+                , success: onSuccess //function w three parameters -- only need data parameter
+                , error: onError
+
+            };
+
+            $.ajax(url, settings);
+        }
+        
+        //POST
+        let postAuthor = function (obj, onSuccess, onError) { //passing in parameter obj which is the payload
+
+            const settings = {
+                type: "POST"  //HTTP VERB/METHOD
+                , headers: {
+
+                    "API-AUTH": "U7WQREKB7"
+
+                }
+                , data: obj //PAYLOAD/BODY
+                , contentType: 'application/x-www-form-urlencoded; charset=UTF-8'   //this is the default for the payload
+                , dataType: "json"  //TYPE OF DATA WE'RE GETTING BACK
+                , success: onSuccess //CALLBACK F(x) WHEN REQUEST IS SUCCESSFUL
+                , error: onError    //CALLBACK F(x) WHEN REQUEST IS NOT SUCCESSFUL
+
+            };
+
+            $.ajax(url, settings);
+        }
+
+        //GET BY ID
+        let getAuthor = function (id, onSuccess, onError) {
+
+            const settings = {
+                type: "GET"
+                , headers: {
+
+                    "API-AUTH": "U7WQREKB7"
+
+                }
+                , success: onSuccess //function w three parameters -- only need data parameter
+                , error: onError
+
+            };
+
+            $.ajax(url + id, settings);
+        }
+
+        //PUT
+        let updateAuthor = function (obj, onSuccess, onError) { //passing in parameter obj which is the payload
+
+            const settings = {
+                type: "PUT"  //HTTP VERB/METHOD
+                , headers: {
+
+                    "API-AUTH": "U7WQREKB7"
+
+                }
+                , data: obj //PAYLOAD/BODY
+                , contentType: 'application/x-www-form-urlencoded; charset=UTF-8'   //this is the default for the payload
+                , dataType: "json"  //TYPE OF DATA WE'RE GETTING BACK
+                , success: onSuccess //CALLBACK F(x) WHEN REQUEST IS SUCCESSFUL
+                , error: onError    //CALLBACK F(x) WHEN REQUEST IS NOT SUCCESSFUL
+
+            };
+
+            $.ajax(url + obj.id, settings);
+        }
+
+        //DELETE
+        let deleteAuthor = function (id, onSuccess, onError) {
+
+            const settings = {
+                type: "DELETE"
+                , headers: {
+
+                    "API-AUTH": "U7WQREKB7"
+
+                }
+                , success: onSuccess //function w three parameters -- only need data parameter
+                , error: onError
+
+            };
+
+            $.ajax(url + id, settings);
+        }
