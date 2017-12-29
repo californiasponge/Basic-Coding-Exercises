@@ -1,0 +1,88 @@
+ARRAY LOOP && ARRAY SWITCH STATEMENTS
+BASIC - NOTHING FANCY
+  
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>Karre Array and DOM Manipulation</title>
+    <!-- Bootstrap -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+    <h4>Array A TOP 5</h4>
+    <div class="list-container">
+        <ul id="list">
+
+        </ul>
+        <ul id="newList">
+
+        </ul>
+    </div>
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+    <!-- All your code goes below here-->
+    <script type="text/javascript">
+        // DIRECTION: Create an array with the names of your top 5 bands
+        // a descriptive variable is created and set equal to an array containing 5 strings that each list different bands
+        var myBands = ["Flume", "SZA", "Sam Smith", "Sia", "Maroon 5"];
+
+        // DIRECTION: Loop through the array you created and display each of your choices in an un-ordered list
+        // a for loop is created to run through each index of the array myBands
+        // variable i represents the zero based index of the array and we loop through for when i is less than the length of the array (stop condition). 
+        // At the end of each loop we increment i by one
+        for (var i = 0; i < myBands.length; i++) {
+            var x = i + 1;
+            var bandList = "<li>" + "My #" + x + " band is " + myBands[i] + "</li>";
+            var bandOrder = "<li>" + "My " + x + "st favorite band is " + myBands[i] + "</li>";
+            var bandOrder2 = "<li>" + "My " + x + "nd favorite band is " + myBands[i] + "</li>";
+            var bandOrder3 = "<li>" + "My " + x + "rd favorite band is " + myBands[i] + "</li>";
+            var bandOrderTh = "<li>" + "My " + x + "th favorite band is " + myBands[i] + "</li>";
+            $("div").children().first().append(bandList);
+
+            /* DIRECTION:
+            Create another loop that will add to the current list or display below the original list. 
+            This list will display the name of your favorite band according to the suffix that is based on the 
+            position in the array.
+            */
+
+            //switch created to adjust what is written depending on case
+            switch (i) {
+                case 0:
+                    x == 1;
+                    $("div").children().last().append(bandOrder);
+                    break;
+                case 1:
+                    x == 2;
+                    $("div").children().last().append(bandOrder2);
+                    break;
+                case 2:
+                    x == 3;
+                    $("div").children().last().append(bandOrder3);
+                    break;
+                default:
+                    $("div").children().last().append(bandOrderTh);
+                    break;
+            }
+
+        }
+
+    </script>
+
+</body>
+
+</html>
