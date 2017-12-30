@@ -1,0 +1,189 @@
+C#
+
+namespace Cars
+{
+    public class Car
+    {
+        public string Name { get; set; }
+        public string Color { get; set; }
+        public string Model { get; set; }
+        public string Body { get; set; }
+        public bool IsLuxury { get; set; }
+        public string Luxurious()
+        {
+            if (this.IsLuxury)
+            {
+                return "Is Luxury";
+            }
+            else
+            {
+                return "Is not Luxury";
+            }
+        }
+        public bool IsNew { get; set; }
+        public string Condition()
+        {
+            if (this.IsNew)
+            {
+                return "Is New";
+            }
+            else
+            {
+                return "Is Used";
+            }
+        }
+        public double AverageCost { get; set; }
+
+        public override string ToString() //by default is public
+        {
+            string carInfo = null;
+
+            carInfo += this.Name + ", ";
+            carInfo += this.Color + ", ";
+            carInfo += this.Model + ", ";
+            carInfo += this.Body + ", ";
+            carInfo += this.Luxurious() + ", ";
+            carInfo += this.Condition() + ", ";
+            carInfo += "$" + this.AverageCost;
+
+            return carInfo;
+        }
+
+    }
+}
+
+
+
+using Cars;
+
+    class Program
+    {
+        static void Main(string[] args)
+        {
+                Car[] myCars = new Car[5];   //object keyword 
+
+                Car myCurrentCar = new Car
+                {
+                    Name = "Toyota",
+                    Color = "Charcoal Gray",
+                    Model = "Rav 4",
+                    Body = "SUV",
+                    IsLuxury = false,
+                    IsNew = false,
+                    AverageCost = 24000.99
+                };
+                myCurrentCar.Luxurious();
+                myCurrentCar.Condition();
+
+                myCars[0] = myCurrentCar;
+
+                Car myFirstCar = new Car
+                {
+                    Name = "Toyota",
+                    Color = "Silver",
+                    Model = "Rav 4",
+                    Body = "SUV",
+                    IsLuxury = false,
+                    IsNew = false,
+                    AverageCost = 6050.09
+                };
+                myFirstCar.Luxurious();
+                myFirstCar.Condition();
+
+                myCars[1] = myFirstCar;
+
+                Car myFutureCar = new Car
+                {
+                    Name = "Porsche",
+                    Color = "Black",
+                    Model = "Cayenne",
+                    Body = "SUV",
+                    IsLuxury = true,
+                    IsNew = true,
+                    AverageCost = 14400.96
+                };
+                myFutureCar.Luxurious();
+                myFutureCar.Condition();
+
+                myCars[2] = myFutureCar;
+
+                Car myFamilyCar = new Car
+                {
+                    Name = "Nissan",
+                    Color = "White",
+                    Model = "Murano",
+                    Body = "SUV",
+                    IsLuxury = false,
+                    IsNew = false,
+                    AverageCost = 18040.50
+                };
+                myFamilyCar.Condition();
+                myFamilyCar.Luxurious();
+
+                myCars[3] = myFamilyCar;
+
+                Car aRandomCar = new Car();
+                aRandomCar.Name = "Telsa";
+                aRandomCar.Color = "Slate";
+                aRandomCar.Model = "Model 5";
+                aRandomCar.Body = "Sedan";
+                aRandomCar.IsLuxury = true;
+                aRandomCar.IsNew = true;
+                aRandomCar.AverageCost = 50000.00;
+                aRandomCar.Luxurious();
+                aRandomCar.Condition();
+
+                myCars[4] = aRandomCar;
+
+                Console.ForegroundColor = ConsoleColor.Cyan;
+
+                foreach (object obj in myCars)
+                {
+                    Console.WriteLine(obj);
+                    Console.WriteLine();
+                }
+
+                for (int i = 0; i < myCars.Length; i++)
+                {
+                    if (myCars[i].IsNew == false && myCars[i].AverageCost < 15000)
+                    {
+                        Console.WriteLine("Is Used and under 15K:\n" + myCars[i]);
+                        Console.WriteLine();
+
+                    }
+                }
+
+            Console.ReadLine();
+
+
+            //List<Car> cars = new List<Car>();
+            //cars.Add(myCurrentCar);
+            //cars.Add(myFirstCar);
+            //cars.Add(myFamilyCar);
+            //cars.Add(myFutureCar);
+            //cars.Add(aRandomCar);
+
+            // for (int i = 0; i < cars.Count; i++)
+            //{
+            //    if (cars[i].IsNew == false && cars[i].AverageCost < 15000)
+            //   {
+            //    Console.WriteLine(cars);
+            // }
+            //}
+
+
+
+            //Console.WriteLine("{0}, {1}, {2}, {3}, {4}, {5}, {6}",
+            //                                    myCurrentCar.Name,
+            //                                    myCurrentCar.Color,
+            //                                    myCurrentCar.Model,
+            //                                    myCurrentCar.Body,
+            //                                    myCurrentCar.Luxurious(),
+            //                                    myCurrentCar.Condition(),
+            //                                    myCurrentCar.AverageCost);
+
+
+        }
+
+    }
+    
