@@ -1,4 +1,4 @@
-Basic For Loop on Array with if/else statement
+Basic For Loop on Array with if/else statement -- Written 12/6/2017
 
         var readingList = [
             {
