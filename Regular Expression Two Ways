@@ -1,0 +1,33 @@
+RegEx -- phone number manipulation
+
+//VERSION ONE w/ step by step explaination
+
+let formatNumber = function (numb) {
+
+            var strNumber = ("" + numb).replace(/\D/g, '');
+            /*("" + numb) -- turns the number into a string
+            replace(/\D/g, '') -- select non digit matches; find all matches - not just the first (g) and replace with empty string 
+            since string is empty(no spaces either) - it removes that non digit characters */
+            
+            var n = strNumber.match(/^(\d{3})(\d{3})(\d{4})$/);
+            /*using the string of just numbers, match the ones that follow the pattern that starts(^) with 3 digits
+            followed by three digits followed by 4 digits then ends($) -- also group each section of digits and capture them */
+            
+            return (!n) ? null : + n[1] + "-" + n[2] + "-" + n[3];
+            /*ternary expression -- as long as n is truthy return the first group of the match followed by a dash
+            followed by the second group of the match followed by a dash followed by the third group of the match 
+           --- using n[#] because match() returns an array so you are accessing the indices
+            */
+        }
+        
+//VERSION TWO
+//chaining + arrow function
+
+        let formatNumber = numb => ("" + numb).replace(/\D/g, '').replace(/^(\d{3})(\d{3})(\d{4})$/, '($1) $2-$3');
+        
+        calling f(x):
+        formatNumber(3105555555);
+        
+        should return:
+        "(310) 555-5555"
+        
