@@ -1,0 +1,43 @@
+Calculator using JS & ES6
+
+        const calculator = {
+        
+            errorMsg: 'Please enter 2 numbers'
+            
+            , add: (x, y) => {
+            
+                if (typeof x == 'number' && x != null && typeof y == 'number' && y != null) {
+                    return x + y;
+                } else {
+                    return calculator.errorMsg;
+                }
+            }
+            
+            , subtract: (x, y) => {
+            
+                if (typeof x == 'number' && x != null && typeof y == 'number' && y != null) {
+                    return x - y;
+                } else {
+                    return calculator.errorMsg;
+                }
+            }    
+            
+            , multiply: (x, y) => {
+                if (typeof x == 'number' && x != null && typeof y == 'number' && y != null) {
+                    return x * y;
+                } else {
+                    return calculator.errorMsg;
+                }
+            }
+            
+            , divide: (x, y) => {
+                if (y == 0) {
+                    return 'Divide by zero error';
+                } else if (typeof x == 'number' && x != null && typeof y == 'number' && y != null) {
+                    return x / y;
+                } else {
+                    return calculator.errorMsg;
+                }
+            }
+            
+        }
