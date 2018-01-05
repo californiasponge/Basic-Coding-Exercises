@@ -1,0 +1,89 @@
+    Sort & Filter and Array of Objects
+    
+    <script>
+        var tasks = [
+
+            {
+                'firstName': 'Sam',
+
+                'lastName': "Michaels",
+
+                "number": 1728
+
+            },
+
+            {
+                'firstName': 'David',
+
+                'lastName': "Forsty",
+
+                "number": 400
+            },
+
+            {
+                'firstName': 'Mark',
+
+                'lastName': "Hill",
+
+                "number": 5
+            },
+
+            {
+                'firstName': 'Mark',
+
+                'lastName': "Marron",
+
+                "number": 15
+            }
+
+        ];
+
+
+        sortNumbers = arr => {
+
+            if (arr == null || typeof arr != 'object' || arr.length <= 0) {
+
+                return 'Please enter an array of numbers';
+
+            } else {
+
+                return arr.sort((a, b) => a - b);  //arr.sort() auto returns in ascending order
+
+            }
+
+        }
+
+        sortNumbersDesc = numArr => {
+
+            if (numArr == null || typeof numArr != 'object' || numArr.length <= 0) {
+
+                return 'Please enter an array of numbers';
+
+            } else {
+
+                return numArr.sort((a, b) => b - a);
+
+            }
+
+        }
+
+        filterNames = (arr, str) => {
+
+            if (arr == null || typeof arr != 'object' || arr.length <= 0) {
+
+                return 'Please enter an array';
+
+            } else {
+
+                let names = arr.filter((arr) => arr.firstName == str);
+
+                if (names == false) { //filtering returns true or false 
+
+                    return 'No matches';
+                }
+                return names;
+
+            }
+
+
+        }
