@@ -1,0 +1,23 @@
+
+        var isNumber = p => Number.isInteger(p);
+
+        var findNumbers = function (arr) {
+
+            if (!arr || !Array.isArray(arr)) {
+
+                return "Not an array or null";
+
+            } else {
+
+                let newArray = [];
+
+                for (let i = 0; i < arr.length; i++) {
+                    if (isNumber(arr[i])) {
+                        newArray.push(arr[i]);
+                    }
+                }
+
+                return newArray;
+            }
+
+        }
