@@ -1,0 +1,24 @@
+Reverse the display order of string characters and array elements
+
+    <script>
+
+        reverseString = str => {
+            return str.split("").reverse().join("")           
+        }
+
+
+        reverseArray = arr => {
+            return arr.reverse();
+        }
+
+
+        reverseArrayLoop = arr => {
+            let newArray = [];
+
+            for(d = arr.length - 1; d >= 0 ; d--) {
+                newArray.push(arr[d]);
+            }
+            return newArray;
+        }
+
+    </script>
