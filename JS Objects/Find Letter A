@@ -1,0 +1,27 @@
+
+        var removeA = function (string) {
+            //check if parameter is null and not of type string, check for empty strings and strings that do not have a's)
+            if (!string || !typeof string == "string" || string == null) {
+                return "Please enter a valid string";
+            } else {
+                //if the parameter passes the previous conditions, REMOVE all the letters "a"
+                return string.split(/a/gi).join("");
+                //should split the string, search for all a's (g for global and i for ignore case flags)
+                // join with "" return string with all the a's removed (if left blank, fills a's with commas, with " " fills a's w a space)
+            }
+
+        }
+
+// var removeA = str => !string || !typeof string == "string" || string == null ? "Please enter a valid string" : string.split(/a/gi).join("");
+
+        var countA = function (string) {
+            //check if parameter is null and not of type string (make sure to check for empty strings too)
+            if (!string || !typeof string == "string" || string == null) {
+                return "Please enter a valid string";
+            } else {
+                //if the parameter passes the previous conditions, COUNT all the letters "a"
+                return string.match(/A/gi).length;
+                //should return the NUMBER OF the a's (g for global and i for ignore case flags)
+            }
+
+        }
