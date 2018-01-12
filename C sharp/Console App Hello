@@ -1,0 +1,21 @@
+Console App that takes an input and creates an output based on the user input
+
+namespace ConsoleAppIntro
+{
+    class Program
+    {
+        static void Main(string[] args) //"MAIN METHOD"
+        {
+
+            Console.WriteLine("What is your name?");//add the string to the end of the same line then creates a new line
+            string userInput = Console.ReadLine();
+            Console.WriteLine(); //creates a new line
+            Console.WriteLine("Hello, {0}", userInput);
+            //allows you to set to a variable and then changes depending on what is logged in console.
+
+            Console.ReadLine(); //leaves the app open
+
+        }
+
+    }
+}
